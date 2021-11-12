@@ -1,0 +1,48 @@
+README FOR THE REPEATED GAMES COMPETITION
+
+# OVERVIEW
+This is a Python framework for playing repeated 2x2 symmetric games between agents
+
+# ASSIGNMENT
+You should create an agent file that makes action decisions in a repeated game. 
+You can see examples of other agents in the agents\ folder.  
+Make sure you name your file something unique (BYU net id maybe?) and specify your agent name as the examples do. 
+Other than that you can use whatever techniques you desire to choose actions in the games
+
+# OVERVIEW
+There are 2 files in the main directory, and then three subdirectories. 
+The subdirectories are: 
+- agents/ - the folder containing the agent python files.  Included example agents are: 
+-- constant0_agent.py : an agent that always selects action 0
+-- constant1_agent.py : an agent that always selects action 1
+-- random_agent.py    : an agent that randomizes 50/50 over actions
+-- fictitious_agent.py: an agent that uses fictitious play - best responding at each time step to the mixed strategy indicated by the action choice history of the opponent
+
+- logs/ - the folder where game logs and tournament results are saved
+
+- games/ - the folder that has the games that will be part of the tournament.  Included games are: 
+-- chicken.txt - the game of chicken
+-- coordination.txt - the coordination game, where both agents get a reward of 1 if their actions match, and 0 otherwise
+-- prisoners.txt  - the prisoners dilemma game
+
+The two files in the main directory are the main scripts that will run the games and tournament.  They are: 
+
+- play_repeated_game.py : this file contains code to play a repeated game between two agents.  When run as the main script, it will play a single game between two agents. The arguments for this script, when run as the main script can be seen by typing "python play_repeated_game.py -h" at the command-line. (NOTE: cannot play an agent against itself)
+-- Usage examples: 
+--- python play_repeated_game.py random_agent.py constant0_agent.py -g coordination.txt -p 0.01 -w -v 
+    This will run play the coordination game between random and constant0 agents, with a probability of stopping after each round of 0.01.  It will (w)rite out the logs, and (v)erbose-ly print out a lot of information as the game is running. 
+--- python play_repeated_game.py random_agent.py fictitious_agent.py -g chicken.txt
+    This will play the random and fictitious agents in the chicken game, with the other parameters default (stop prob of 0.005) and the logs not being written out and no verbose information being displayed to the terminal. 
+
+- tournament.py : this file contains the code to run a tournament, with a default behavior of playing all agents in the agents folder against each other (in all combinations except for self-play) on all games in the games/ folder.  Other command line arguments to control (1) the number of games played per matchup (2) the stop probability for a game (3) if the logs are saved out and (4) verbose mode, exist, and can by seen by running "python tournament.py -h" at the command line.  With the -g option, a single game can be specified, instead of all games in the folder. 
+-- Usage examples: 
+--- python tournament.py
+    This will play all agents against each other on all games
+--- python tournament.py -w
+    The same, but saving out logs to the logs/ folder
+--- python tournament.py -w -g chicken.txt
+    The same, but only playing with the chicken game, instead of all of them. 
+
+
+#CLASS TOURNAMENT
+We will conduct a class tournament with our agents on the included games, and some mystery games, with the 4 example agents added to the class set.  Each of you will submit an agent and a write-up describing your agent's strategy. 
