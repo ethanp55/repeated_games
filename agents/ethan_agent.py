@@ -11,7 +11,7 @@ opp_idx = not my_idx
 
 
 def _get_coop_action_pairs():
-    cells = {(game[0, :2], 0, 0), (game[0, 2:], 0, 1), (game[1, :2], 1, 0), (game[1, 2:], 1, 1)}
+    cells = {(tuple(game[0, 0]), 0, 0), (tuple(game[0, 1]), 0, 1), (tuple(game[1, 0]), 1, 0), (tuple(game[1, 1]), 1, 1)}
     optimal_cells = []
     filtered_optimal_cells = []
 
@@ -58,9 +58,9 @@ def update(my_index, actions):
     global opp_idx
 
     my_idx = my_index
-    opp_index = not my_index
+    opp_idx = not my_index
     prev_actions[my_index] = actions[my_index]
-    prev_actions[opp_index] = actions[opp_index]
+    prev_actions[opp_idx] = actions[opp_idx]
 
 
 def getAction(verbose=False):
@@ -83,7 +83,7 @@ def getAction(verbose=False):
         action = coop_pair[my_idx] if opp_prev_action_was_coop else not coop_pair[my_idx]
 
     if verbose:
-        print('[Constant 1] Current opponent history: ', prev_actions)
-        print('[Constant 1] Choosing action: ', action)
+        print('[Ethan P] Current opponent history: ', prev_actions)
+        print('[Ethan P] Choosing action: ', action)
 
-    return action
+    return int(action)
